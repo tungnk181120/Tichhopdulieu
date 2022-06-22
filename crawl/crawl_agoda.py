@@ -10,7 +10,8 @@ chrome_options.add_argument("--incognito")
 driver = webdriver.Chrome(chrome_options=chrome_options, executable_path='D:/LEARNING/20212/Tich hop du lieu/Crawl/chromedriver')
 driver.get('https://www.agoda.com/vi-vn/search?city=13170')
 hotel_links = []
-time.sleep(5)
+time.sleep(20)
+# Thêm timesleep -> load nhiều hơn. Chưa cần xử lý cuộn trang.
 elements = driver.find_elements(By.CLASS_NAME, 'PropertyCard__Link')
 for element in elements:
     url = element.get_attribute("href")
