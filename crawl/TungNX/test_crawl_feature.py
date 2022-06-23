@@ -7,9 +7,10 @@ import re
 
 import pandas as pd
 
+driver = webdriver.Chrome("chromedriver.exe")
+
 
 def craw_from_url(url):
-    driver = webdriver.Chrome("chromedriver.exe")
     driver.get(url)
 
     # click xem them
@@ -127,7 +128,7 @@ def craw_from_url(url):
 
 
 records = []
-with open('url_booking_com.txt') as f:
+with open('url_booking_com_2.txt') as f:
     for line in f:
         try:
             records.append(craw_from_url(line))
@@ -136,5 +137,5 @@ with open('url_booking_com.txt') as f:
 
 df = pd.DataFrame(data=records, columns=['City', 'Hotel name', 'Url', 'Address', 'Stars', 'Price',
                   'Rating', 'Number of reviews', 'Reviews', 'Facilities', 'Description', 'Nearby places'])
-df.to_csv('craw_booking_com.csv', index=False, encoding='utf8')
+df.to_csv('craw_booking_com_2.csv', index=False, encoding='utf8')
 # print(records)
