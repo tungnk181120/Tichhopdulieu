@@ -73,7 +73,7 @@ def scrollToEnd(driver):
 
 
 def crawlLinks(driver):
-    scrollToEnd()
+    scrollToEnd(driver)
     urls = driver.find_elements(by=By.CLASS_NAME, value="uitk-card-link")
     links = [url.get_attribute('href') for url in urls]
     hotel_links = []
@@ -92,42 +92,42 @@ def writeToText(demo):
     f.close()
 
 
-for i in range(0, 8):
-    print("Bat dau crawl!\n")
-    # Test dem so lan click
-    count_click = 1
+# for i in range(0, 8):
+print("Bat dau crawl!\n")
+# Test dem so lan click
+count_click = 1
 
-    driver = webdriver.Chrome(service=Service(
-        ChromeDriverManager().install()), options=options)
-    driver.get(list_url[i])
+driver = webdriver.Chrome(service=Service(
+    ChromeDriverManager().install()), options=options)
+driver.get(list_url[0])
 
-    # Xu ly nut "Hien thi them"
-    while count_click < click_range[i]:
-        try:
-            scrollToEnd(driver)
-            WebDriverWait(driver, delay).until(EC.visibility_of_element_located(
-                (By.CSS_SELECTOR, 'button[data-stid="show-more-results"]'))).click()
-            print("Button clicked #", count_click)
-            count_click += 1
-            time.sleep(5)
-            
-        except:
-            count_click += 1
-            pass
+# Xu ly nut "Hien thi them"
+while count_click < 5:
+    try:
+        scrollToEnd(driver)
+        WebDriverWait(driver, delay).until(EC.visibility_of_element_located(
+            (By.CSS_SELECTOR, 'button[data-stid="show-more-results"]'))).click()
+        print("Button clicked #", count_click)
+        count_click += 1
+        time.sleep(5)
 
-    #Crawl
-    # time.sleep(5)
-    # demo = crawlLinks(driver)
-    # print("Done part 1-----------\n")
-    # print(len(demo))
-    # writeToText(demo)
-    # print("Hoan thanh crawl!")
-    # time.sleep(5)
+    except:
+        count_click += 1
+        pass
 
-# # File link chinh
-# save_dir = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\url_booking.txt"
-# # Tinh chinh lai du lieu link url
-# with open(file_dir, 'r') as f1, open(save_dir, 'w') as f2:
-#     for x in f1:
-#         if 'Hotel-Search' not in x:
-#             f2.write(x.strip()+'\n')
+# Crawl
+time.sleep(5)
+demo = crawlLinks(driver)
+print("Done part 1-----------\n")
+print(len(demo))
+writeToText(demo)
+print("Hoan thanh crawl!")
+time.sleep(5)
+
+# File link chinh
+save_dir = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\url_booking.txt"
+# Tinh chinh lai du lieu link url
+with open(file_dir, 'r') as f1, open(save_dir, 'w') as f2:
+    for x in f1:
+        if 'Hotel-Search' not in x:
+            f2.write(x.strip()+'\n')

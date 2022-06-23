@@ -246,13 +246,55 @@
 # print(hotel_links)
 # driver.quit()
 
-save_dir = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\url_booking.txt"
-with open(save_dir, 'r') as f:
-    lines = f.readlines()
+d1_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/Hanoi_list.txt"
+d2_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/HoChiMinh_list.txt"
+d3_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/DaLat_list.txt"
+d4_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/DaNang_list.txt"
+d5_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/NhaTrang_list.txt"
+d6_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/PhuQuoc_list.txt"
+d7_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/VungTau_list.txt"
+d8_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/QuangNinh_list.txt"
 
-set(lines)
+save_dir = "E:/STUDY/UNIVERSITY/Sem_20212/Tich_hop_du_lieu/BTL/crawl_data/Hotel_list.txt"
 
-if len(lines) == len(set(lines)):
-      print ('all lines are unique')
-else:
-      print ('not all lines are unique')
+data1 = data2 = data3 = data4 = data5 = data6 = data7 = data8 = ""
+
+# Reading data from file1
+with open(d1_dir) as f1:
+    data1 = f1.read()
+with open(d2_dir) as f2:
+    data2 = f2.read()
+with open(d3_dir) as f3:
+    data3 = f3.read()
+with open(d4_dir) as f4:
+    data4 = f4.read()
+with open(d5_dir) as f5:
+    data5 = f5.read()
+with open(d6_dir) as f6:
+    data6 = f6.read()
+with open(d7_dir) as f7:
+    data7 = f7.read()
+with open(d8_dir) as f8:
+    data8 = f8.read()
+
+# data1+="\n"
+# data2+="\n"
+# data3+="\n"
+# data4+="\n"
+# data5+="\n"
+# data6+="\n"
+# data7+="\n"
+
+data1+=data2
+data1+=data3
+data1+=data4
+data1+=data5
+data1+=data6
+data1+=data7
+data1+=data8
+
+with open (save_dir, 'w') as fp:
+    fp.write(data1)
+    
+f = open(save_dir, "r")
+print(len(f.readlines()))
