@@ -17,6 +17,8 @@ def craw_from_url(url):
     try:
         t1 = driver.find_element_by_css_selector(
             "a[class='b-button b-button_secondary b-button_small']").click()
+
+        # driver.find_element_by_css_selector('button[data-stid="show-more-results"]').click()
     except:
         pass
 
@@ -111,6 +113,14 @@ def craw_from_url(url):
         res_CSVC.append(csvc[i].text)
     # print("END============================")
 
+    res_list_image = []
+    list_image = driver.find_elements_by_css_selector(
+        "div.clearfix.bh-photo-grid.fix-score-hover-opacity > div[aria-hidden='true'] > a")
+    for image in list_image:
+        try:
+            res_list_image.append(image.get_attribute('data-thumb-url'))
+        except:
+            pass
     return (
         city.get_attribute('value'),
         hotel_name.text,
@@ -123,19 +133,48 @@ def craw_from_url(url):
         res_review,
         res_CSVC,
         res_description,
-        res_nearby_places
+        res_nearby_places,
+        res_list_image
     )
 
 
-records = []
-with open('url_booking_com_2.txt') as f:
+# records_1 = []
+# with open('url_booking_new_1.txt') as f:
+#     for line in f:
+#         try:
+#             records_1.append(craw_from_url(line))
+#             # print(craw_from_url(line))
+#         except:
+#             pass
+
+# df = pd.DataFrame(data=records_1, columns=['City', 'Hotel name', 'Url', 'Address', 'Stars', 'Price',
+#                   'Rating', 'Number of reviews', 'Reviews', 'Facilities', 'Description', 'Nearby places', 'Image'])
+# df.to_csv('data_booking_com_1.csv', index=False, encoding='utf8')
+
+
+# records_2 = []
+# with open('url_booking_new_2.txt') as f:
+#     for line in f:
+#         try:
+#             records_2.append(craw_from_url(line))
+#             # print(craw_from_url(line))
+#         except:
+#             pass
+
+# df = pd.DataFrame(data=records_2, columns=['City', 'Hotel name', 'Url', 'Address', 'Stars', 'Price',
+#                   'Rating', 'Number of reviews', 'Reviews', 'Facilities', 'Description', 'Nearby places', 'Image'])
+# df.to_csv('data_booking_com_2.csv', index=False, encoding='utf8')
+
+
+records_3 = []
+with open('url_booking_new_3.txt') as f:
     for line in f:
         try:
-            records.append(craw_from_url(line))
+            records_3.append(craw_from_url(line))
+            # print(craw_from_url(line))
         except:
             pass
 
-df = pd.DataFrame(data=records, columns=['City', 'Hotel name', 'Url', 'Address', 'Stars', 'Price',
-                  'Rating', 'Number of reviews', 'Reviews', 'Facilities', 'Description', 'Nearby places'])
-df.to_csv('craw_booking_com_2.csv', index=False, encoding='utf8')
-# print(records)
+df = pd.DataFrame(data=records_3, columns=['City', 'Hotel name', 'Url', 'Address', 'Stars', 'Price',
+                  'Rating', 'Number of reviews', 'Reviews', 'Facilities', 'Description', 'Nearby places', 'Image'])
+df.to_csv('data_booking_com_3.csv', index=False, encoding='utf8')
