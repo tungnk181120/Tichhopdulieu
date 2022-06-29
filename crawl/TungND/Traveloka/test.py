@@ -1,3 +1,4 @@
+from cgitb import text
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -17,39 +18,31 @@ options.add_argument('--disable-gpu')
 options.add_argument("start-maximized")
 options.add_argument('disable-infobars')
 
-# List file
-Quangninh_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\QuangNinh_url.txt"
-Quangninh_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\Quangninh.csv"
+file_dir = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\demo.txt"
 
-Dalat_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\DaLat_url.txt"
-Dalat_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\Dalat.csv"
+save_dir = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\demo_list.csv"
 
-Danang_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\Danang_list_1.txt"
-Danang_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\Danang.csv"
+url_demo = "https://www.traveloka.com/vi-vn/hotel/vietnam/paradise-elegance-cruise-1000000577244?spec=16-07-2022.17-07-2022.1.1.HOTEL.1000000577244.Du%20thuy%E1%BB%81n%20Paradise%20Elegance.1&prevSearchId=1736844481457578522&loginPromo=1&contexts=%7B%22inventoryRateKey%22%3A%22UBh6NEbrm3oRvPz965TEQYx6yJl1TnvT4YG%2Byjorw5RM0tKsNUio4Rxug1zOzHJilcvZa8YdqqIySdppe7dolTIewZlxfjiOGz6oXLTucMvN0%2BgQ3yZPvZcoHwUFNN%2BZpcr%2F%2FNa8o9ElfN8zOYhzzZeg0X586laFpeUViPi9rxCFtrSDsu208k0kdESQK1DTyHKWIZ1BQohM1LtP1iyp%2BvzU1DzhU0%2FYDjP46sAdpc7BKHpZT7ZDw0m5A93dWTzye%2BWHaI%2FRSlAE%2FUnrAjXp4A%3D%3D%22%7D"
 
-Hanoi_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\Hanoi_list_1.txt"
-Hanoi_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\Hanoi.csv"
+url_demo_1 = "https://www.traveloka.com/vi-vn/hotel/vietnam/mong-cai-trade-union-hotel-3000020006436?spec=16-07-2022.17-07-2022.1.1.HOTEL.3000020006436.Kha%CC%81ch%20sa%CC%A3n%20C%C3%B4ng%20%C4%90oa%CC%80n%20Mo%CC%81ng%20Ca%CC%81i.1&prevSearchId=1736844515235363655&loginPromo=1&contexts=%7B%22inventoryRateKey%22%3A%22povEwB3ZzsU2C6pd%2B6MdU13LUNuufACdbU0usK5vg0dM0tKsNUio4Rxug1zOzHJilcvZa8YdqqIySdppe7dolTIewZlxfjiOGz6oXLTucMvN0%2BgQ3yZPvZcoHwUFNN%2BZpcr%2F%2FNa8o9ElfN8zOYhzzZeg0X586laFpeUViPi9rxAIkohi4u7xG7rsXyZPwrFnIvEWeildVo7nbHxIWcXPVNGysXwP9P%2F6jQTjnyKeTv%2ByqYmxSenRKFEfSHS0XO3ksOocFaHL1Wb9vQXntcm%2BDw%3D%3D%22%7D"
 
-HoChiMinh_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\HoChiMinh_list_1.txt"
-HoChiMinh_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\HoChiMinh.csv"
+url_demo_2 = "https://www.traveloka.com/vi-vn/hotel/vietnam/tung-luxury-hotel-9000000755717?spec=16-07-2022.17-07-2022.1.1.HOTEL.9000000755717.Tung%20Luxury%20Hotel.1&prevSearchId=1736844288645430286&loginPromo=1&contexts=%7B%22inventoryRateKey%22%3A%22povEwB3ZzsU2C6pd%2B6MdU13LUNuufACdbU0usK5vg0dM0tKsNUio4Rxug1zOzHJilcvZa8YdqqIySdppe7dolTIewZlxfjiOGz6oXLTucMvN0%2BgQ3yZPvZcoHwUFNN%2BZpcr%2F%2FNa8o9ElfN8zOYhzzZeg0X586laFpeUViPi9rxAu5NABrHBm2aRMdJjU8x26IvEWeildVo7nbHxIWcXPVNGysXwP9P%2F6jQTjnyKeTv%2ByqYmxSenRKFEfSHS0XO3ksOocFaHL1Wb9vQXntcm%2BDw%3D%3D%22%7D"
 
-Nhatrang_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\NhaTrang_url.txt"
-Nhatrang_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\Nhatrang.csv"
+url_demo_3 = "https://www.traveloka.com/vi-vn/hotel/vietnam/anh-dao-guest-house-3000010028777?spec=16-07-2022.17-07-2022.1.1.HOTEL.3000010028777.Anh%20Dao%20Guest%20House.1&prevSearchId=1736844288645430286&loginPromo=1&contexts=%7B%22inventoryRateKey%22%3A%22povEwB3ZzsU2C6pd%2B6MdU13LUNuufACdbU0usK5vg0dM0tKsNUio4Rxug1zOzHJilcvZa8YdqqIySdppe7dolTIewZlxfjiOGz6oXLTucMvN0%2BgQ3yZPvZcoHwUFNN%2BZpcr%2F%2FNa8o9ElfN8zOYhzzZeg0X586laFpeUViPi9rxAu31scXuv2Pg5SAiDNDfkhIvEWeildVo7nbHxIWcXPVNGysXwP9P%2F6jQTjnyKeTv%2ByqYmxSenRKFEfSHS0XO3ksOocFaHL1Wb9vQXntcm%2BDw%3D%3D%22%7D"
 
-Phuquoc_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\PhuQuoc_url.txt"
-Phuquoc_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\Phuquoc.csv"
+url_demo_4 = "https://www.traveloka.com/vi-vn/hotel/vietnam/indochina-sails-cruise-1000000302743?spec=16-07-2022.17-07-2022.1.1.HOTEL.1000000302743.Du%20thuy%E1%BB%81n%20Indochina%20Sails.1&prevSearchId=1736844515235363655&loginPromo=1&contexts=%7B%22inventoryRateKey%22%3A%22povEwB3ZzsU2C6pd%2B6MdU13LUNuufACdbU0usK5vg0dM0tKsNUio4Rxug1zOzHJilcvZa8YdqqIySdppe7dolTIewZlxfjiOGz6oXLTucMvN0%2BgQ3yZPvZcoHwUFNN%2BZpcr%2F%2FNa8o9ElfN8zOYhzzZeg0X586laFpeUViPi9rxDdR3vsTGivIBc0tRq3GF81IvEWeildVo7nbHxIWcXPVNGysXwP9P%2F6jQTjnyKeTv%2ByqYmxSenRKFEfSHS0XO3ksOocFaHL1Wb9vQXntcm%2BDw%3D%3D%22%7D"
 
-Vungtau_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\VungTau_url.txt"
-Vungtau_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\Vungtau.csv"
+url_demo_5 = "https://www.traveloka.com/vi-vn/hotel/vietnam/ann-hotel-3000010035223?spec=16-07-2022.17-07-2022.1.1.HOTEL.3000010035223.Kha%CC%81ch%20sa%CC%A3n%20Ann.1&prevSearchId=1736844515235363655&loginPromo=1&contexts=%7B%22inventoryRateKey%22%3A%22povEwB3ZzsU2C6pd%2B6MdU13LUNuufACdbU0usK5vg0dM0tKsNUio4Rxug1zOzHJilcvZa8YdqqIySdppe7dolTIewZlxfjiOGz6oXLTucMvN0%2BgQ3yZPvZcoHwUFNN%2BZpcr%2F%2FNa8o9ElfN8zOYhzzZeg0X586laFpeUViPi9rxB%2FG2V6f0%2FO5XMb8kRwkR04mhLDdV0WLeT%2FFKfQ0QL8LH02Dvlx%2F8PjYogEE5yzx6g6yOKyKeIDf7jO3GM45O1ok5sYzsZdVhL8yLD1ILOp6Q%3D%3D%22%7D"
 
-Halong_f = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\data_url\\HaLong_url.txt"
-Halong_s = "E:\\STUDY\\UNIVERSITY\\Sem_20212\\Tich_hop_du_lieu\\BTL\\crawl_data\\crawl_traveloka\\detail_data\\data_again\\Halong.csv"
+url_demo_6 = "https://www.traveloka.com/vi-vn/hotel/vietnam/indochina-sails-cruise-1000000302743?spec=16-07-2022.17-07-2022.1.1.HOTEL.1000000302743.Du%20thuy%E1%BB%81n%20Indochina%20Sails.1&prevSearchId=1736844515235363655&loginPromo=1&contexts=%7B%22inventoryRateKey%22%3A%22povEwB3ZzsU2C6pd%2B6MdU13LUNuufACdbU0usK5vg0dM0tKsNUio4Rxug1zOzHJilcvZa8YdqqIySdppe7dolTIewZlxfjiOGz6oXLTucMvN0%2BgQ3yZPvZcoHwUFNN%2BZpcr%2F%2FNa8o9ElfN8zOYhzzZeg0X586laFpeUViPi9rxDdR3vsTGivIBc0tRq3GF81IvEWeildVo7nbHxIWcXPVNGysXwP9P%2F6jQTjnyKeTv%2ByqYmxSenRKFEfSHS0XO3ksOocFaHL1Wb9vQXntcm%2BDw%3D%3D%22%7D"
 
 
 def scrollToEnd(driver):
     page = driver.find_element(by=By.TAG_NAME, value="html")
     page.send_keys(Keys.END)
     sleep(5)
+
+# Function to convert
 
 
 def listToString(s):
@@ -59,18 +52,18 @@ def listToString(s):
     return str1
 
 
-# driver = webdriver.Chrome(service=Service(
-#     ChromeDriverManager().install()), options=options)
+driver = webdriver.Chrome(service=Service(
+    ChromeDriverManager().install()), options=options)
 
 
-def crawl_from_url(url, ten_tinh):
+def crawl_from_url(url):
     driver = webdriver.Chrome(service=Service(
         ChromeDriverManager().install()), options=options)
     driver.get(url)
     sleep(5)
 
     # Ten thanh pho
-    hotel_city = ten_tinh
+    hotel_city = "Quảng Ninh"
 
     # Ten khach san
     hotel_name = driver.find_element(By.TAG_NAME, 'h1').text
@@ -186,70 +179,28 @@ def crawl_from_url(url, ten_tinh):
     )
 
 
-def save2csv(file_dir, save_dir, ten_tinh):
-    records = []
-    with open(file_dir) as f:
-        for line in f:
-            try:
-                records.append(crawl_from_url(line, ten_tinh))
-            except:
-                pass
+records = []
+with open(file_dir) as f:
+    for line in f:
+        try:
+            records.append(crawl_from_url(line))
+        except:
+            pass
 
-    df = pd.DataFrame(data=records, columns=['City', 'Hotel name', 'Image', 'Url', 'Address', 'Stars', 'Min Price',
-                                             'Rating', 'Number of reviews', 'Reviews', 'Facilities', 'Description', 'Nearby places'])
-    df.to_csv(save_dir, index=False, encoding='utf8')
-    print("So ban ghi la: " + str(len(records)))
+df = pd.DataFrame(data=records, columns=['City', 'Hotel name', 'Image', 'Url', 'Address', 'Stars', 'Min Price',
+                  'Rating', 'Number of reviews', 'Reviews', 'Facilities', 'Description', 'Nearby places'])
+# df = pd.DataFrame(data=records, columns=['Description'])
+print(df)
+df.to_csv(save_dir, index=False, encoding='utf8')
 
 
-# print(Dalat_f, '\n', Dalat_s)
-# print(Danang_f, '\n', Danang_s)
-# print(Hanoi_f, '\n', Hanoi_s)
-# print(HoChiMinh_f, '\n', HoChiMinh_s)
-# print(Nhatrang_f, '\n', Nhatrang_s)
-# print(Phuquoc_f, '\n', Phuquoc_s)
-# print(Quangninh_f, '\n', Quangninh_s)
-# print(Vungtau_f, '\n', Vungtau_s)
-
-# print("Bat dau crawl: \n")
-# print("\n==================\n")
-# print("Da Lat:")
-# save2csv(Dalat_f, Dalat_s, "Đà Lạt")
-# print("Het Da Lat!!!\n==============\n")
+# driver = webdriver.Chrome(service=Service(
+#     ChromeDriverManager().install()), options=options)
+# driver.get(url_demo_1)
 # sleep(5)
 
-# print("Da Nang:")
-# save2csv(Danang_f, Danang_s, "Đà Nẵng")
-# print("Het Da Nang!!!\n==============\n")
-# sleep(5)
 
-# print("Ho Chi Minh:")
-# save2csv(HoChiMinh_f, HoChiMinh_s, "Hồ Chí Minh")
-# print("Het Ho Chi Minh!!!\n==============\n")
-# sleep(5)
+# driver.close()
 
-# print("Vung Tau:")
-# save2csv(Vungtau_f, Vungtau_s, "Vũng Tàu")
-# print("Het Vung Tau!!!\n==============\n")
-# sleep(5)
-
-# print("Quang Ninh:")
-# save2csv(Quangninh_f, Quangninh_s, "Quảng Ninh")
-# print("Het Quang Ninh!!!\n==============\n")
-# sleep(5)
-
-# print("Nha Trang:")
-# save2csv(Nhatrang_f, Nhatrang_s, "Nha Trang")
-# print("Het Nha Trang!!!\n==============\n")
-# sleep(5)
-
-# print("Ha Noi:")
-# save2csv(Hanoi_f, Hanoi_s, "Hà Nội")
-# print("Het Ha Noi!!!\n==============\n")
-# sleep(5)
-
-# print("Phu Quoc:")
-# save2csv(Phuquoc_f, Phuquoc_s, "Phú Quốc")
-# print("\n----------------------\n")
-
-print("Ha Long:")
-save2csv(Halong_f, Halong_s, "Hạ Long")
+# print(hotel_description)
+# print(type(hotel_description))
