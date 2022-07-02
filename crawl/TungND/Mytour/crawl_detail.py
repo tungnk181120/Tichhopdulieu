@@ -112,10 +112,10 @@ def handleSpecificString(list_ls):
 
 
 # url_demo = "https://mytour.vn/khach-san/44177-khach-san-the-twin.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2Bkhj4MYg%2F5obnE8D0l7Xy3l1D%2Bl9Yo1E51WaG9wYNLKup5rFYUpFqtiCW5nRvEw2w7OTCjhzeM0%3D"
-# url_demo_1 = "https://mytour.vn/khach-san/50423-citadines-marina-ha-long.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2Bkhj4MYg%2F5orKAvp5TXfLZ6ExPOu7k7IVqfA98hLf1bYvEKvKnt9VjjsUj6y2al9ysbNPa8Qhvk%3D"
-# url_demo_2 = "https://mytour.vn/khach-san/2536-khach-san-ruby-star-reddoorz.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2Bkhj4MYg%2F5oYFM8dC2YAKRw4b%2Fe5dTbFH6Jo5%2FN3ojftv62Mu1GcW7HAsIKB7si2"
-# url_demo_3 = "https://mytour.vn/khach-san/902-khach-san-minh-dang.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2Bkhj4MYg%2F5qoImovAGJqqdgBWaRz1GCk6WDLGZx%2F89MVsmJqnuSe2QesjK1R3IXNbbceAzTKfKg%3D"
-# url_demo_4 = "https://mytour.vn/khach-san/49675-khach-san-hyatt-regency-west-hanoi.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2FF6T3StyQjnEsg42LAT%2BlVv75arbiSgdXSnVqeNi7m57rjY0EqpA0xqYHfeVLSM10QqOyl%2FKS2k%3D"
+# url_demo_1 = "https://mytour.vn/khach-san/534-khach-san-cong-doan-quang-ba.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2Bkhj4MYg%2F5phADnYGSiB56qvrLTaJfFFmXSvPXN5JR6%2FifLIms7xWQQj8X0I1j%2FC"
+# url_demo_2 = "https://mytour.vn/khach-san/972-khach-san-imperial-ha-noi.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2FF6T3StyQjmzoexGUhWj7Y2jWNss2jiG4%2FVBmh3GfNiur3YPcf%2F2al%2Bl1ETH01drWBtMAViQi0I%3D"
+# url_demo_3 = "https://mytour.vn/khach-san/53595-leaf-hotel-phu-quoc.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2Bkhj4MYg%2F5rfZSI1bHE8IePSSCgnHANIQuS9vrRf7tAlUgkJYlWb9ACPAjNKR0lP"
+# url_demo_4 = "https://mytour.vn/khach-san/45549-khach-san-la-vela-saigon.html?checkIn=16-07-2022&checkOut=17-07-2022&adults=1&rooms=1&children=0&priceKey=%2FF6T3StyQjmzoexGUhWj7Y2jWNss2jiGFsTbquV688QVYgBmRSvdm3uwoTi17rkWALWKy6tAYno%3D"
 
 
 def crawl_from_url(url, ten_tinh):
@@ -145,9 +145,10 @@ def crawl_from_url(url, ten_tinh):
 
     # So sao khach san
     try:
-        stars = driver.find_elements(
-            By.CSS_SELECTOR, 'div.MuiBox-root.jss186 > svg')
-        hotel_star = len(stars)
+        txt = driver.find_elements(By.CSS_SELECTOR, '#rooms_overview > div')[1]
+        km = txt.find_elements(
+            By.CSS_SELECTOR, 'div > div > div > div > div > svg')
+        hotel_star = len(km)
     except:
         hotel_star = "NULL"
 
@@ -291,38 +292,36 @@ def save2csv(file_dir, save_dir, ten_tinh):
     print("So ban ghi cua " + ten_tinh + " la: " + str(len(records)))
 
 
-save2csv(Hanoi_f, Hanoi_s, "Hà Nội")
-sleep(4)
-save2csv(HCM_f, HCM_s, "Hồ Chí Minh")
-sleep(4)
-save2csv(Dalat_f, Dalat_s, "Đà Lạt")
-sleep(4)
-save2csv(Danang_f, Danang_s, "Đà Nẵng")
-sleep(4)
-save2csv(Nhatrang_f, Nhatrang_s, "Nha Trang")
-sleep(4)
-save2csv(Phuquoc_f, Phuquoc_s, "Phú Quốc")
-sleep(4)
-save2csv(Vungtau_f, Vungtau_s, "Vũng Tàu")
-sleep(4)
-save2csv(Quangninh_f, Quangninh_s, "Hạ Long")
-sleep(4)
-save2csv(Halong_f, Halong_s, "Hạ Long")
+# save2csv(Hanoi_f, Hanoi_s, "Hà Nội")
+# sleep(4)
+# save2csv(HCM_f, HCM_s, "Hồ Chí Minh")
+# sleep(4)
+# save2csv(Dalat_f, Dalat_s, "Đà Lạt")
+# sleep(4)
+# save2csv(Danang_f, Danang_s, "Đà Nẵng")
+# sleep(4)
+# save2csv(Nhatrang_f, Nhatrang_s, "Nha Trang")
+# sleep(4)
+# save2csv(Phuquoc_f, Phuquoc_s, "Phú Quốc")
+# sleep(4)
+# save2csv(Vungtau_f, Vungtau_s, "Vũng Tàu")
+# sleep(4)
+# save2csv(Quangninh_f, Quangninh_s, "Hạ Long")
+# sleep(4)
+# save2csv(Halong_f, Halong_s, "Hạ Long")
 
-# driver = webdriver.Chrome(service=Service(
-#     ChromeDriverManager().install()), options=options)
-# driver.get(url_demo)
-# sleep(5)
-# try:
-#     all_fac = driver.find_elements(
-#         By.CSS_SELECTOR, '#top_places > div')[1]
-#     facs = all_fac.find_elements(By.CSS_SELECTOR, 'div > div > div > span')
-#     hotel_facilities = [facs[i].text for i in range(len(facs))]
-#     del hotel_facilities[0]
-#     if len(hotel_facilities) == 8:
-#         del hotel_facilities[len(hotel_facilities)-1]
-# except:
-#     hotel_facilities = ["NULL"]
+driver = webdriver.Chrome(service=Service(
+    ChromeDriverManager().install()), options=options)
+driver.get(url_demo_4)
+sleep(5)
+try:
+    txt = driver.find_elements(By.CSS_SELECTOR, '#rooms_overview > div')[1]
+    km = txt.find_elements(
+        By.CSS_SELECTOR, 'div > div > div > div > div > svg')
+    hotel_star = len(km)
+except:
+    hotel_star = "NULL"
 
-# print(hotel_facilities)
-# driver.close()
+
+print(hotel_star)
+driver.close()
