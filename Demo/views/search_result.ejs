@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrate Hotels</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="slider">
+        <span class="imgtext">
+        <p id="wel">Chào mừng đến với</p>
+        <h2 id="h1">Tích hợp dữ liệu khách sạn</h2>
+        <p id="loremp">Tích hợp dữ liệu khách sạn từ các trang web dịch vụ du lịch </p>
+        </span>
+        <img src="images/slider.jpg" class="imag">
+    </div>
+    <div class="check">
+        <form action="/search_result" class="search-form" method="GET">
+            <input type="text" name="searchname" placeholder="Nhập tên địa điểm, khách sạn,..." class="searchbox">
+            <button class="search-button" type="submit" aria-label="Search" id="searchbtn">Tìm kiếm</button>
+        </form>
+    </div>
+    <div class="result-hotels">
+        <span>Kết quả tìm kiếm</span>
+        <% var Initcluster = "0"; %>
+        <% hotels.forEach(function(hotel){ %>
+            <% if(hotel.Cluster != Initcluster){ %>
+                <% Initcluster = hotel.Cluster; %>
+                <a href="/hotel/<%- hotel.Cluster %>" class="hotel-item-result-link">
+                    <div class="hotel-item-result">
+                        <img src="<%- hotel.Image %>" alt="" class="hotel-item-result-img">
+                        <div class="hotel-item-result-info">
+                            <span class="hotel-item-result-name"><%- hotel.name %></span>
+                            <div class="address_inner_result">
+                                <i class="fa fa-location-arrow"></i>
+                                <span class="address_result"><%- hotel.address %></span>
+                            </div>
+                            <div class="rating_inner_result">
+                                <span class="rating_result"><%- hotel.Rating %></span>
+                                <span class="numberOfreviews_result"><%- hotel.number_review %> đánh giá</span>
+                            </div>
+                        </div>   
+                        <span class="hotel-item-result-price"><%- hotel.Price %> đ</span>
+                        <input type="button" value="Xem thông tin" id="hotel-item-result-rentbtn">    
+                    </div>
+                </a>  
+            
+            <% } %>  
+        <% }); %> 
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrate Hotels</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="slider">
+        <span class="imgtext">
+        <p id="wel">Chào mừng đến với</p>
+        <h2 id="h1">Tích hợp dữ liệu khách sạn</h2>
+        <p id="loremp">Tích hợp dữ liệu khách sạn từ các trang web dịch vụ du lịch </p>
+        </span>
+        <img src="images/slider.jpg" class="imag">
+    </div>
+    <div class="check">
+        <form action="/search_result" class="search-form" method="GET">
+            <input type="text" name="searchname" placeholder="Nhập tên địa điểm, khách sạn,..." class="searchbox">
+            <button class="search-button" type="submit" aria-label="Search" id="searchbtn">Tìm kiếm</button>
+        </form>
+    </div>
+    <!--
+    <div class="result-hotels">
+        <a href="" class="hotel-item-result-link">
+            <div class="hotel-item-result">
+                <img src="images/hotel.jpg" alt="" class="hotel-item-result-img">
+                <div class="hotel-item-result-info">
+                    <span class="hotel-item-result-name">The Chill Suites- Trung Tâm Thành phố</span>
+                    <div class="address_inner_result">
+                        <i class="fa fa-location-arrow"></i>
+                        <span class="address_result">Hai Ba Trung, Hanoi</span>
+                    </div>
+                    <div class="rating_inner_result">
+                        <span class="rating_result">9.6</span>
+                        <span class="numberOfreviews_result">512 đánh giá</span>
+                    </div>
+                </div>   
+                <span class="hotel-item-result-price">1.123.456 đ</span>
+                <input type="button" value="Xem thông tin" id="hotel-item-result-rentbtn">    
+            </div>
+        </a>        
+        <a href="" class="hotel-item-result-link">
+            <div class="hotel-item-result">
+                <img src="images/hotel.jpg" alt="" class="hotel-item-result-img">
+                <div class="hotel-item-result-info">
+                    <span class="hotel-item-result-name">The Chill Suites- Trung Tâm Thành phố</span>
+                    <div class="address_inner_result">
+                        <i class="fa fa-location-arrow"></i>
+                        <span class="address_result">Hai Ba Trung, Hanoi</span>
+                    </div>
+                    <div class="rating_inner_result">
+                        <span class="rating_result">9.6</span>
+                        <span class="numberOfreviews_result">512 đánh giá</span>
+                    </div>
+                </div>   
+                <span class="hotel-item-result-price">1.123.456 đ</span>
+                <input type="button" value="Xem thông tin" id="hotel-item-result-rentbtn">    
+            </div>
+        </a>        
+        <a href="" class="hotel-item-result-link">
+            <div class="hotel-item-result">
+                <img src="images/hotel.jpg" alt="" class="hotel-item-result-img">
+                <div class="hotel-item-result-info">
+                    <span class="hotel-item-result-name">The Chill Suites- Trung Tâm Thành phố</span>
+                    <div class="address_inner_result">
+                        <i class="fa fa-location-arrow"></i>
+                        <span class="address_result">Hai Ba Trung, Hanoi</span>
+                    </div>
+                    <div class="rating_inner_result">
+                        <span class="rating_result">9.6</span>
+                        <span class="numberOfreviews_result">512 đánh giá</span>
+                    </div>
+                </div>   
+                <span class="hotel-item-result-price">1.123.456 đ</span>
+                <input type="button" value="Xem thông tin" id="hotel-item-result-rentbtn">    
+            </div>
+        </a>        
+        <a href="" class="hotel-item-result-link">
+            <div class="hotel-item-result">
+                <img src="images/hotel.jpg" alt="" class="hotel-item-result-img">
+                <div class="hotel-item-result-info">
+                    <span class="hotel-item-result-name">The Chill Suites- Trung Tâm Thành phố</span>
+                    <div class="address_inner_result">
+                        <i class="fa fa-location-arrow"></i>
+                        <span class="address_result">Hai Ba Trung, Hanoi</span>
+                    </div>
+                    <div class="rating_inner_result">
+                        <span class="rating_result">9.6</span>
+                        <span class="numberOfreviews_result">512 đánh giá</span>
+                    </div>
+                </div>   
+                <span class="hotel-item-result-price">1.123.456 đ</span>
+                <input type="button" value="Xem thông tin" id="hotel-item-result-rentbtn">    
+            </div>
+        </a>        
+    </div>
+    -->
+    <!-- <div class="hotels">
+        <div class="hotelimages">
+            <span class="innerimg">
+                <img src="images/room-1.jpg" class="hotel_index_image">
+                <p class="hotel_index_name">Khách sạn Bách Khoa</p>
+                <span class="hotel_index_address">Hai Ba Trung, Ha Noi</span>
+                <p class="pricetag">1.000.000đ</p>
+            </span>
+            <span class="innerimg">
+                <img src="images/room-2.jpg" class="hotel_index_image">
+                <p class="hotel_index_name">Khách sạn Bách Khoa</p>
+                <p class="pricetag">1.000.000đ</p>
+            </span>
+            <span class="innerimg">
+                <img src="images/room-3.jpg" class="hotel_index_image">
+                <p class="hotel_index_name">Khách sạn Bách Khoa</p>
+                <p class="pricetag">1.000.000đ</p>
+            </span>
+            <span class="innerimg">
+                <img src="images/room-4.jpg" class="hotel_index_image">
+                <p class="hotel_index_name">Khách sạn Bách Khoa</p>
+                <p class="pricetag">1.000.000đ</p>
+            </span>
+            <span class="innerimg">
+                <img src="images/room-5.jpg" class="hotel_index_image">
+                <p class="hotel_index_name">Khách sạn Bách Khoa</p>
+                <p class="pricetag">1.000.000đ</p>
+            </span>
+            <span class="innerimg">
+                <img src="images/room-6.jpg" class="hotel_index_image">
+                <p class="hotel_index_name">Khách sạn Bách Khoa</p>
+                <p class="pricetag">1.000.000đ</p>
+            </span>
+        </div>
+    </div> -->
+</body>
+</html>

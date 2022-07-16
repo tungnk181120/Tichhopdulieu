@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrate Hotels</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="slider">
+        <span class="imgtext">
+        <p id="wel">Chào mừng đến với</p>
+        <h2 id="h1">Tích hợp dữ liệu khách sạn</h2>
+        <p id="loremp">Tích hợp dữ liệu khách sạn từ các trang web dịch vụ du lịch </p>
+        </span>
+        <img src="/images/slider.jpg" class="imag">
+    </div>
+    <div class="check">
+        <form action="/search_result" class="search-form" method="GET">
+            <input type="text" name="searchname" placeholder="Nhập tên địa điểm, khách sạn,..." class="searchbox">
+            <button class="search-button" type="submit" aria-label="Search" id="searchbtn">Tìm kiếm</button>
+        </form>
+    </div>
+
+    
+    <div class="hotel">
+        <div class="hotel_image">
+            <img src="<%- hotel.Image %>" class="hotel_image_inner" alt="">
+        </div>
+        <div class="hotel_info">
+            <span class="hotel_name"><%- hotel.name %></span>
+            <div class="address_inner">
+                <i class="fa fa-location-arrow"></i>
+                <span class="address"><%- hotel.address %></span>
+            </div>
+            <div class="stars-rating">
+                <div class="star-vote-container">
+                  <div class="star-votes">
+                  <% stars = hotel.Stars; %>
+                  <% if(stars == '3.5'){ %>
+                  <div class="star-vote" id="star-vote">
+                    <span class="fa fa-star " id="1"></span>
+                    <span class="fa fa-star " id="2"></span>
+                    <span class="fa fa-star " id="3"></span>
+                    <i class="fa fa-star-half" id="0.5"></i>
+                  </div>
+                  <% } else if (stars === '4.5') { %>
+                  <div class="star-vote" id="star-vote">
+                    <span class="fa fa-star " id="1"></span>
+                    <span class="fa fa-star " id="2"></span>
+                    <span class="fa fa-star " id="3"></span>
+                    <span class="fa fa-star " id="4"></span>
+                    <i class="fa fa-star-half" id="0.5"></i>
+                  </div>
+                  <% } else if (stars === '2.5') { %>
+                  <div class="star-vote" id="star-vote">
+                    <span class="fa fa-star " id="1"></span>
+                    <span class="fa fa-star " id="2"></span>
+                    <i class="fa fa-star-half" id="0.5"></i>
+                  </div>
+                  <% } else if (stars === '1.5') { %>
+                  <div class="star-vote" id="star-vote">
+                    <span class="fa fa-star " id="1"></span>
+                    <i class="fa fa-star-half" id="0.5"></i>
+                  </div>
+                  <% } else if (stars === '0.5') { %>
+                  <div class="star-vote" id="star-vote">
+                    <i class="fa fa-star-half" id="0.5"></i>
+                  </div>
+                  <% } else if (stars === '1') { %>
+                  <div class="star-vote" id="star-vote">
+                    <span class="fa fa-star " id="1"></span>
+                  </div>
+                  <% } else if (stars === '2') { %>
+                  <div class="star-vote" id="star-vote">
+                    <span class="fa fa-star " id="1"></span>
+                    <span class="fa fa-star " id="2"></span>
+                  </div>
+                  <% } else if (stars === '3') { %>
+                  <div class="star-vote" id="star-vote">
+                    <span class="fa fa-star " id="1"></span>
+                    <span class="fa fa-star " id="2"></span>
+                    <span class="fa fa-star " id="3"></span>
+                  </div>
+                  <% } else if (stars === '4') { %>
+                  <div class="star-vote" id="star-vote">
+                    <span class="fa fa-star " id="1"></span>
+                    <span class="fa fa-star " id="2"></span>
+                    <span class="fa fa-star " id="3"></span>
+                    <span class="fa fa-star " id="4"></span>
+                  </div>
+                  <% } else{ %>  
+                    <div class="star-vote" id="star-vote">
+                      <span class="fa fa-star " id="1"></span>
+                      <span class="fa fa-star " id="2"></span>
+                      <span class="fa fa-star " id="3"></span>
+                      <span class="fa fa-star " id="4"></span>
+                      <span class="fa fa-star " id="5"></span>
+                    </div>
+                  <% } %>                    
+                  </div>          
+                </div>
+            </div>
+            <div class="rating_inner">
+                <span class="rating"><%- hotel.Rating %></span>
+                <span class="numberOfreviews"><%- hotel.number_review %> đánh giá</span>
+            </div>            
+            <span class="min_price"><%- hotel.Price %> đ</span>
+            <a href="<%- hotel.Url %>" class="rentlink">
+                <input type="button" value="Đặt phòng ngay" id="rentbtn">
+            </a>            
+            <div class="facilities">
+                <span class="facilities_header">Điểm nổi bật nhất</span>
+                <div class="facilities_inner">
+                    <span class="facility"><%- hotel.Facilities %></span>
+                </div>              
+            </div>
+            <div class="nearByPlaces">
+                <span class="nearByPlaces_header">Các địa điểm xung quanh</span>
+                <div class="nearByPlaces_inner">
+                    <span class="place"><%- hotel.Nearby_places %></span>
+                </div>              
+            </div>
+        </div>
+        
+    </div>
+    <div class="suggestions">
+        <span class="suggestions-header">So sánh</span>
+        <% hotels.forEach(function(hotel){ %>
+            <div class="website">
+                <% website = hotel.Website %>
+                <% if(website == 'agoda.com'){ %>
+                <div class="agoda-logo">
+                    <img src="/images/agoda-logo-8C565D040A-seeklogo.com.png" alt="" class="logo-img">
+                </div>
+                <% } else if (website === 'booking.com') { %>
+                <div class="agoda-logo">
+                    <img src="/images/booking.png" alt="" class="logo-img">
+                </div>
+                <% } else if (website === 'traveloka.com') { %>
+                <div class="agoda-logo">
+                    <img src="/images/traveloka-logo.png" alt="" class="logo-img">
+                </div>
+                <% } else{ %>
+                <div class="agoda-logo">
+                    <img src="/images/logo-mytour-award.png" alt="" class="logo-img">
+                </div>
+                <% } %> 
+                
+                <div class="hotel-item">
+                    <img src="<%- hotel.Image %>" alt="" class="hotel-item-img">
+                    <span class="hotel-item-name"><%- hotel.name %></span>
+                    <span class="hotel-item-price"><%- hotel.Price %> đ</span>
+                    <a href="<%- hotel.Url %>" class="hotel-item-rentlink">
+                        <input type="button" value="Đặt phòng ngay" id="hotel-item-rentbtn">
+                    </a>                
+                </div>
+        </div>
+         <% }); %>
+
+    </div>
+</body>
+</html>
